@@ -30,115 +30,114 @@
                 <a href="https://github.com/mahmoudamr-ui" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://x.com/Mahmoudx_wady?t=BAr_fWNMPtuZzhk-_EHV3g&s=09" target="_blank">
                     <img src="x.png" alt="X Logo" width="22" height="22">
-                </a>                
+                </a>
             </div>
         </div>
     </section>
-    
-    <style>
-        .cursor {
-            display: inline-block;
-            width: 3px; /* زيادة سماكة الخط */
-            height: 1em;
-            background-color: black; /* لون الخط */
-            margin-left: 2px;
-        }
-    </style>
-    
+
     <script>
-        const roles = ["Frontend Developer", "Backend Developer","Application Developer"];
+        const roles = ["Frontend Developer", "Backend Developer", "Application Developer"];
         let currentIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
         const dynamicText = document.getElementById("dynamic-text");
-        const typingSpeed = 150; // سرعة الكتابة
-        const deletingSpeed = 100; // سرعة الحذف
-        const pauseDuration = 1000; // مدة التوقف قبل الحذف
-    
+        const typingSpeed = 150;
+        const deletingSpeed = 100;
+        const pauseDuration = 1000;
+
         function typeEffect() {
             const currentRole = roles[currentIndex];
             if (!isDeleting) {
-                // الكتابة
                 dynamicText.textContent = currentRole.slice(0, charIndex);
                 charIndex++;
                 if (charIndex > currentRole.length) {
                     isDeleting = true;
-                    setTimeout(typeEffect, pauseDuration); // توقف قبل الحذف
+                    setTimeout(typeEffect, pauseDuration);
                     return;
                 }
             } else {
-                // الحذف
                 dynamicText.textContent = currentRole.slice(0, charIndex);
                 charIndex--;
                 if (charIndex === 0) {
                     isDeleting = false;
-                    currentIndex = (currentIndex + 1) % roles.length; // الانتقال للكلمة التالية
+                    currentIndex = (currentIndex + 1) % roles.length;
                 }
             }
             const speed = isDeleting ? deletingSpeed : typingSpeed;
             setTimeout(typeEffect, speed);
         }
-    
-        // بدء التأثير
+
         typeEffect();
     </script>
-    
-    
-    
 
     <section class="cards" id="services">
         <h2 class="title">Experience</h2>
         <div class="card">
-            <div class="card">
-                <div class="info">
-                    <h3>Script Writing</h3>
-                    <p>specialize in writing clean code and creating engaging scripts that enhance user experience. I am proficient in building apps and websites, ensuring smooth and intuitive user interfaces with well-structured and functional content.</p>
-                </div>
-            </div>
+            <div class="info">
+                <h3>Script Writing</h3>
+                <p>Specialize in writing clean code and creating engaging scripts that enhance user experience. Proficient in building apps and websites, ensuring smooth and intuitive user interfaces with well-structured and functional content.</p>
             </div>
         </div>
     </section>
 
     <section class="projects" id="projects">
         <h2 class="title">Projects</h2>
-        <h2 class="title">Soon...</h2>
-                    </strong>
-                </div>
+        <div class="card">
+            <div class="info">
+                <h3>Technology Courses</h3>
+                <p>Learn programming, computer science, and tech trends with [Website Name]. Enjoy courses in Python, Java, AI, and more. Engage in hands-on projects, quizzes, and expert guidance. Start your tech journey today!</p>
             </div>
-        </div>
     </section>
 
-    <section class="cards contact" id="contact">
-        <h2 class="title">Let's work together</h2>
-        <div class="content">
-            <div class="card">
-                <div class="icon">
-                    <i class="fas fa-phone"></i>
-                </div>
-                <div class="info">
-                    <h3>Phone</h3>
-                    <p>+201063768900</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <div class="info">
-                    <h3>Email</h3>
-                    <p>mahmoudamr.wady@gmail.com</p>
-                </div>
-            </div>
-        </div>
+    <section class="contact-form" id="contact">
+        <h2 class="title">Get in Touch</h2>
+        <form id="contactForm" action="https://formspree.io/f/xkgozvpw" method="POST">
+            <input type="text" name="name" id="name" placeholder="Your Name" required>
+            <input type="email" name="email" id="email" placeholder="Your Email" required>
+            <textarea name="message" id="message" placeholder="Your Message" required></textarea>
+            <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you">
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="formStatus"></div>
     </section>
-    
+
     <footer class="footer">
         <p class="footer-title"><span>Mahmoud Amr</span></p>
         <div class="social-icons">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><img src="x.png" alt="X Logo" width="15" height="15"></a>
+            <a href="https://github.com/mahmoudamr-ui" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://x.com/Mahmoudx_wady?t=BAr_fWNMPtuZzhk-_EHV3g&s=09" target="_blank">
+                <img src="x.png" alt="X Logo" width="15" height="15">
+            </a>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const formStatus = document.getElementById('formStatus');
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    formStatus.innerHTML = 'Message sent successfully!';
+                    form.reset();
+                } else {
+                    formStatus.innerHTML = 'There was an error sending your message.';
+                }
+            })
+            .catch(error => {
+                formStatus.innerHTML = 'There was an error sending your message.';
+            });
+        });
+    </script>
 
 </body>
 </html>
